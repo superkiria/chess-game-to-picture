@@ -1,4 +1,4 @@
-package com.github.superkiria.svg;
+package com.github.superkiria.chess.svg;
 
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.transcoder.TranscoderInput;

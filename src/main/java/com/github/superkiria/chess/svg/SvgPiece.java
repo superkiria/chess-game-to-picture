@@ -6,7 +6,7 @@ import org.w3c.dom.svg.SVGDocument;
 import java.io.File;
 import java.io.IOException;
 
-import static com.github.superkiria.svg.SvgUtils.createSVGDocumentFromFile;
+import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile;
 
 public class SvgPiece {
 
