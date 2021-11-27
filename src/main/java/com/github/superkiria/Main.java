@@ -1,31 +1,17 @@
 package com.github.superkiria;
 
-import com.github.superkiria.chess.svg.SvgBoard;
-import com.github.superkiria.chess.svg.SvgFilesForPieces;
-import com.github.superkiria.chess.svg.SvgPiece;
+import com.github.superkiria.chess.svg.SvgBoardBuilder;
 
-import java.io.File;
-import java.util.EnumMap;
-
-import static com.github.superkiria.chess.svg.SvgUtils.documentToXmlString;
 import static com.github.superkiria.chess.svg.SvgUtils.saveDocumentToPng;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        SvgBoard board = new SvgBoard();
-        SvgPiece piece = new SvgPiece(new File("src/main/resources/Chess_klt45.svg"));
-        EnumMap<SvgFilesForPieces, SvgPiece> pieces = new EnumMap<>(SvgFilesForPieces.class);
-        for (SvgFilesForPieces entry : SvgFilesForPieces.values()) {
-            pieces.put(entry, new SvgPiece(new File("src/main/resources/" + entry.getFileName())));
-        }
-        board.flipBoard();
-        board.flipBoard();
-        board.importPiece(pieces.get(SvgFilesForPieces.BLACK_BISHOP).getDocumentNode(), 0, 0);
-        board.importPiece(pieces.get(SvgFilesForPieces.WHITE_KING).getDocumentNode(), 2, 4);
-        board.importPiece(pieces.get(SvgFilesForPieces.BLACK_PAWN).getDocumentNode(), 7, 3);
-        System.out.println(documentToXmlString(board.getDocument()));
-        saveDocumentToPng(board.getDocument());
+
+        SvgBoardBuilder builder = new SvgBoardBuilder();
+        builder.setFen("rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2");
+        builder.init();
+        saveDocumentToPng(builder.getDocument());
     }
 
 }

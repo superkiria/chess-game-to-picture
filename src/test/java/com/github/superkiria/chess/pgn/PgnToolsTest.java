@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PgnToFenConverterTest {
+public class PgnToolsTest {
 
     @Test
     public void test() throws Exception {
-        System.out.println(PgnToFenConverter.convertPgnToFen("[Event \"IBM Kasparov vs. Deep Blue Rematch\"]\n" +
+        System.out.println(PgnTools.convertPgnToFen("[Event \"IBM Kasparov vs. Deep Blue Rematch\"]\n" +
                 "[Site \"New York, NY USA\"]\n" +
                 "[Date \"1997.05.11\"]\n" +
                 "[Round \"6\"]\n" +
@@ -27,7 +27,7 @@ public class PgnToFenConverterTest {
     @Test
     public void test_001() throws Exception {
         assertEquals("6k1/ppp3b1/4P2p/2P2Pp1/2nrp3/2N4P/PPK2P2/5BR1 w - - 1 24",
-                PgnToFenConverter.convertPgnToFen("[Event \"Chessboard Editor at Apronus.com\"]\n" +
+                PgnTools.convertPgnToFen("[Event \"Chessboard Editor at Apronus.com\"]\n" +
                 "[Site \"site\"]\n" +
                 "[Date \"2021.11.20\"]\n" +
                 "[Round \"-\"]\n" +
