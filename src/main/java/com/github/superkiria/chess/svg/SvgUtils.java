@@ -38,6 +38,24 @@ public class SvgUtils {
         ostream.close();
     }
 
+    public static ByteArrayOutputStream saveDocumentToPngByteBuffer(Document document) throws Exception {
+
+        // Create a JPEGTranscoder and set its quality hint.
+        PNGTranscoder t = new PNGTranscoder();
+        t.addTranscodingHint(t.KEY_HEIGHT, (float) 1000);
+        t.addTranscodingHint(t.KEY_WIDTH, (float) 1000);
+
+        // Set the transcoder input and output.
+        TranscoderInput input = new TranscoderInput(document);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TranscoderOutput output = new TranscoderOutput(outputStream);
+
+        // Perform the transcoding.
+        t.transcode(input, output);
+
+        return outputStream;
+    }
+
     public static String documentToXmlString(Document doc) throws TransformerException {
         TransformerFactory transfac = TransformerFactory.newInstance();
         Transformer trans = transfac.newTransformer();
@@ -54,7 +72,7 @@ public class SvgUtils {
     }
 
     public static SVGDocument createSVGDocumentFromFile(File file) throws IOException {
-        return saxsvgDocumentFactory.createSVGDocument(file.toURI().toString());
+        return saxsvgDocumentFactory.createSVGDocument(file.toString());
     }
 
 }

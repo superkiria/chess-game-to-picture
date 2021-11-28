@@ -7,16 +7,18 @@ import org.w3c.dom.svg.SVGDocument;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Objects;
 
 import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile;
 
 public class SvgBoard {
 
-    private SVGDocument document = createSVGDocumentFromFile(new File("src/main/resources/Chessboard480.svg"));
+    private final SVGDocument document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("Chessboard480.svg").toString()));
 
     private boolean hasPieces = false;
 
-    public SvgBoard() throws IOException {
+    public SvgBoard() throws IOException, URISyntaxException {
     }
 
     public void importPiece(Node node, int x, int y) {

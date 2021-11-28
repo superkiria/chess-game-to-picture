@@ -6,6 +6,7 @@ import org.w3c.dom.svg.SVGDocument;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -22,13 +23,13 @@ public class SvgBoardBuilder {
         pieces.add(piece);
     }
 
-    private void initSvgBoard() throws IOException {
+    private void initSvgBoard() throws IOException, URISyntaxException {
         svgBoard = new SvgBoard();
     }
 
     private void readFilesForPieces() throws IOException {
         for (SvgFilesForPieces entry : SvgFilesForPieces.values()) {
-            filesForPieces.put(entry, new SvgPiece(new File("src/main/resources/" + entry.getFileName())));
+            filesForPieces.put(entry, new SvgPiece(new File(getClass().getClassLoader().getResource(entry.getFileName()).toString())));
         }
         isFilesForPiecesInitialized = true;
     }
@@ -52,7 +53,7 @@ public class SvgBoardBuilder {
         }
     }
 
-    public void init() throws IOException {
+    public void init() throws IOException, URISyntaxException {
         initPiecesFromFen();
         initSvgBoard();
         readFilesForPieces();
