@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class PgnTools {
 
-    public static String convertPgnToFen(String pgn) throws Exception {
+    public static String convertPgnToFen(String pgn) {
         Game game = GameLoader.loadNextGame(Arrays.asList(pgn.split("\n")).listIterator());
         Board board = new Board();
         for (Move move:
@@ -17,7 +17,11 @@ public class PgnTools {
             board.doMove(move);
         }
         return board.getFen();
+    }
 
+    public static String getLastMove(String pgn) {
+        Game game = GameLoader.loadNextGame(Arrays.asList(pgn.split("\n")).listIterator());
+        return String.valueOf(game.getHalfMoves().getLast());
     }
 
 }

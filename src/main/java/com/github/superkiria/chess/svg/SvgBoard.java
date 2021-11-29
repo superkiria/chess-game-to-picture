@@ -4,6 +4,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.svg.SVGDocument;
+import org.w3c.dom.svg.SVGRect;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +29,29 @@ public class SvgBoard {
         ((Element) imported).setAttributeNode(transform);
         document.getRootElement().appendChild(imported);
         hasPieces = true;
+    }
+
+    public void highlightSquare(int x, int y) {
+        Element svgRect = document.createElementNS("http://www.w3.org/2000/svg","rect");
+        Attr fill = document.createAttribute("fill");
+        fill.setNodeValue("#a8e4a0");
+        Attr xAttr = document.createAttribute("x");
+        xAttr.setNodeValue(String.valueOf(x * 60));
+        Attr yAttr = document.createAttribute("y");
+        yAttr.setNodeValue(String.valueOf(y * 60));
+        Attr height = document.createAttribute("height");
+        height.setNodeValue(String.valueOf(60));
+        Attr width = document.createAttribute("width");
+        width.setNodeValue(String.valueOf(60));
+        Attr cl = document.createAttribute("class");
+        cl.setNodeValue("highlight");
+        svgRect.setAttributeNode(fill);
+        svgRect.setAttributeNode(xAttr);
+        svgRect.setAttributeNode(yAttr);
+        svgRect.setAttributeNode(height);
+        svgRect.setAttributeNode(width);
+        svgRect.setAttributeNode(cl);
+        document.getRootElement().getChildNodes().item(1).appendChild(svgRect);
     }
 
     public void flipBoard() {

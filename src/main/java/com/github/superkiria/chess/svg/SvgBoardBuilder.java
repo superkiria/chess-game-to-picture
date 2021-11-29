@@ -2,6 +2,7 @@ package com.github.superkiria.chess.svg;
 
 import com.github.superkiria.chess.fen.FenTools;
 import com.github.superkiria.chess.internal.PieceOnBoard;
+import com.github.superkiria.chess.pgn.PgnTools;
 import org.w3c.dom.svg.SVGDocument;
 
 import java.io.File;
@@ -14,6 +15,7 @@ public class SvgBoardBuilder {
 
     private String pgn;
     private String fen;
+    private String lastMoveInNotation;
     private SvgBoard svgBoard;
     private List<PieceOnBoard> pieces;
     private EnumMap<SvgFilesForPieces, SvgPiece> filesForPieces = new EnumMap<>(SvgFilesForPieces.class);
@@ -57,15 +59,45 @@ public class SvgBoardBuilder {
         initPiecesFromFen();
         initSvgBoard();
         readFilesForPieces();
+        highltghtLastMove();
         placePiecesOnBoard();
+    }
+
+    public void highltghtLastMove() {
+        if (lastMoveInNotation != null && lastMoveInNotation.length() == 4) {
+            svgBoard.highlightSquare(Integer.parseInt(letterToCoordinates(lastMoveInNotation.substring(0, 1))),
+                    8 - Integer.parseInt(lastMoveInNotation.substring(1, 2)));
+            svgBoard.highlightSquare(Integer.parseInt(letterToCoordinates(lastMoveInNotation.substring(2, 3))),
+                    8 - Integer.parseInt(lastMoveInNotation.substring(3, 4)));
+        }
+    }
+
+    private String letterToCoordinates(String letter) {
+         switch (letter) {
+             case "a": return "0";
+            case "b": return "1";
+            case "c": return "2";
+            case "d": return "3";
+            case "e": return "4";
+            case "f": return "5";
+            case "g": return "6";
+            case "h": return "7";
+            default: return null;
+        }
     }
 
     public void setPgn(String pgn) {
         this.pgn = pgn;
+        this.setFen(PgnTools.convertPgnToFen(pgn));
+        this.setLastMoveInNotation(PgnTools.getLastMove(pgn));
     }
 
     public void setFen(String fen) {
         this.fen = fen;
+    }
+
+    public void setLastMoveInNotation(String notation) {
+        this.lastMoveInNotation = notation;
     }
 
     public SVGDocument getDocument() {
