@@ -59,11 +59,11 @@ public class SvgBoardBuilder {
         initPiecesFromFen();
         initSvgBoard();
         readFilesForPieces();
-        highltghtLastMove();
+        highlightLastMove();
         placePiecesOnBoard();
     }
 
-    public void highltghtLastMove() {
+    public void highlightLastMove() {
         if (lastMoveInNotation != null && lastMoveInNotation.length() == 4) {
             svgBoard.highlightSquare(Integer.parseInt(letterToCoordinates(lastMoveInNotation.substring(0, 1))),
                     8 - Integer.parseInt(lastMoveInNotation.substring(1, 2)));
@@ -74,7 +74,7 @@ public class SvgBoardBuilder {
 
     private String letterToCoordinates(String letter) {
          switch (letter) {
-             case "a": return "0";
+            case "a": return "0";
             case "b": return "1";
             case "c": return "2";
             case "d": return "3";

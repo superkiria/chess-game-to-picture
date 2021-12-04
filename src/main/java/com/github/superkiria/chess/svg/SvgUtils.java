@@ -24,8 +24,8 @@ public class SvgUtils {
 
         // Create a JPEGTranscoder and set its quality hint.
         PNGTranscoder t = new PNGTranscoder();
-        t.addTranscodingHint(t.KEY_HEIGHT, (float) 1000);
-        t.addTranscodingHint(t.KEY_WIDTH, (float) 1000);
+        t.addTranscodingHint(t.KEY_HEIGHT, (float) 960);
+        t.addTranscodingHint(t.KEY_WIDTH, (float) 960);
 
         // Set the transcoder input and output.
         TranscoderInput input = new TranscoderInput(document);
@@ -42,8 +42,8 @@ public class SvgUtils {
 
         // Create a JPEGTranscoder and set its quality hint.
         PNGTranscoder t = new PNGTranscoder();
-        t.addTranscodingHint(t.KEY_HEIGHT, (float) 1000);
-        t.addTranscodingHint(t.KEY_WIDTH, (float) 1000);
+        t.addTranscodingHint(t.KEY_HEIGHT, (float) 960);
+        t.addTranscodingHint(t.KEY_WIDTH, (float) 960);
 
         // Set the transcoder input and output.
         TranscoderInput input = new TranscoderInput(document);

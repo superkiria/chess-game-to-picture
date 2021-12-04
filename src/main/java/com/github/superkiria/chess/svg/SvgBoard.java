@@ -4,22 +4,21 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.svg.SVGDocument;
-import org.w3c.dom.svg.SVGRect;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Objects;
 
 import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile;
 
 public class SvgBoard {
 
-    private final SVGDocument document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("Chessboard480.svg").toString()));
+    private final SVGDocument document;
 
     private boolean hasPieces = false;
 
     public SvgBoard() throws IOException, URISyntaxException {
+        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("Chessboard480.svg").toString()));
     }
 
     public void importPiece(Node node, int x, int y) {
@@ -34,7 +33,7 @@ public class SvgBoard {
     public void highlightSquare(int x, int y) {
         Element svgRect = document.createElementNS("http://www.w3.org/2000/svg","rect");
         Attr fill = document.createAttribute("fill");
-        fill.setNodeValue("#a8e4a0");
+        fill.setNodeValue("#ff0000");
         Attr xAttr = document.createAttribute("x");
         xAttr.setNodeValue(String.valueOf(x * 60));
         Attr yAttr = document.createAttribute("y");
@@ -45,12 +44,15 @@ public class SvgBoard {
         width.setNodeValue(String.valueOf(60));
         Attr cl = document.createAttribute("class");
         cl.setNodeValue("highlight");
+        Attr opacity = document.createAttribute("fill-opacity");
+        opacity.setNodeValue("0.4");
         svgRect.setAttributeNode(fill);
         svgRect.setAttributeNode(xAttr);
         svgRect.setAttributeNode(yAttr);
         svgRect.setAttributeNode(height);
         svgRect.setAttributeNode(width);
         svgRect.setAttributeNode(cl);
+        svgRect.setAttributeNode(opacity);
         document.getRootElement().getChildNodes().item(1).appendChild(svgRect);
     }
 

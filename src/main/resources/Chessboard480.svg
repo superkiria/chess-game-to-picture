@@ -3,46 +3,46 @@
      width="480" height="480"
 >
     <g>
-        <rect class="black" fill="#d18b47" x="0" y="0" width="480" height="480"/>
+        <rect class="black" fill="#589ce0" x="0" y="0" width="480" height="480"/>
 
-        <rect class="white" fill="#ffce9e" x="0" y="0" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="120" y="0" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="240" y="0" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="360" y="0" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="0" y="0" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="120" y="0" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="240" y="0" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="360" y="0" width="60" height="60"/>
 
-        <rect class="white" fill="#ffce9e" x="60" y="60" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="180" y="60" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="300" y="60" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="420" y="60" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="60" y="60" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="180" y="60" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="300" y="60" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="420" y="60" width="60" height="60"/>
 
-        <rect class="white" fill="#ffce9e" x="0" y="120" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="120" y="120" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="240" y="120" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="360" y="120" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="0" y="120" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="120" y="120" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="240" y="120" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="360" y="120" width="60" height="60"/>
 
-        <rect class="white" fill="#ffce9e" x="60" y="180" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="180" y="180" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="300" y="180" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="420" y="180" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="60" y="180" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="180" y="180" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="300" y="180" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="420" y="180" width="60" height="60"/>
 
-        <rect class="white" fill="#ffce9e" x="0" y="240" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="120" y="240" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="240" y="240" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="360" y="240" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="0" y="240" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="120" y="240" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="240" y="240" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="360" y="240" width="60" height="60"/>
 
-        <rect class="white" fill="#ffce9e" x="60" y="300" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="180" y="300" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="300" y="300" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="420" y="300" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="60" y="300" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="180" y="300" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="300" y="300" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="420" y="300" width="60" height="60"/>
 
-        <rect class="white" fill="#ffce9e" x="0" y="360" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="120" y="360" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="240" y="360" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="360" y="360" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="0" y="360" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="120" y="360" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="240" y="360" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="360" y="360" width="60" height="60"/>
 
-        <rect class="white" fill="#ffce9e" x="60" y="420" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="180" y="420" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="300" y="420" width="60" height="60"/>
-        <rect class="white" fill="#ffce9e" x="420" y="420" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="60" y="420" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="180" y="420" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="300" y="420" width="60" height="60"/>
+        <rect class="white" fill="#d8eff2" x="420" y="420" width="60" height="60"/>
     </g>
 </svg>
