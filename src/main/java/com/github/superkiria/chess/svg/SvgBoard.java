@@ -33,7 +33,7 @@ public class SvgBoard {
     public void highlightSquare(int x, int y) {
         Element svgRect = document.createElementNS("http://www.w3.org/2000/svg","rect");
         Attr fill = document.createAttribute("fill");
-        fill.setNodeValue("#ff0000");
+        fill.setNodeValue("#ffff00");
         Attr xAttr = document.createAttribute("x");
         xAttr.setNodeValue(String.valueOf(x * 60));
         Attr yAttr = document.createAttribute("y");
@@ -45,7 +45,7 @@ public class SvgBoard {
         Attr cl = document.createAttribute("class");
         cl.setNodeValue("highlight");
         Attr opacity = document.createAttribute("fill-opacity");
-        opacity.setNodeValue("0.4");
+        opacity.setNodeValue("0.25");
         svgRect.setAttributeNode(fill);
         svgRect.setAttributeNode(xAttr);
         svgRect.setAttributeNode(yAttr);
