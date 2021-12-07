@@ -88,8 +88,4 @@ public class PgnToolsTest {
         );
     }
 
-    @Test
-    public void test_003() throws Exception {
-        System.out.println(PgnTools.getLastMove(PGN_1));
-    }
 }

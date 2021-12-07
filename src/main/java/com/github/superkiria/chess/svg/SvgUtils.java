@@ -18,14 +18,16 @@ import java.io.*;
 
 public class SvgUtils {
 
+    private static final float SIZE = 960;
+
     public static SAXSVGDocumentFactory saxsvgDocumentFactory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
 
     public static void saveDocumentToPng(Document document) throws Exception {
 
         // Create a JPEGTranscoder and set its quality hint.
         PNGTranscoder transcoder = new PNGTranscoder();
-        transcoder.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, (float) 960);
-        transcoder.addTranscodingHint(PNGTranscoder.KEY_WIDTH, (float) 960);
+        transcoder.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, SIZE);
+        transcoder.addTranscodingHint(PNGTranscoder.KEY_WIDTH, SIZE);
 
         // Set the transcoder input and output.
         TranscoderInput input = new TranscoderInput(document);
@@ -42,8 +44,8 @@ public class SvgUtils {
 
         // Create a JPEGTranscoder and set its quality hint.
         PNGTranscoder transcoder = new PNGTranscoder();
-        transcoder.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, (float) 960);
-        transcoder.addTranscodingHint(PNGTranscoder.KEY_WIDTH, (float) 960);
+        transcoder.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, SIZE);
+        transcoder.addTranscodingHint(PNGTranscoder.KEY_WIDTH, SIZE);
 
         // Set the transcoder input and output.
         TranscoderInput input = new TranscoderInput(document);
