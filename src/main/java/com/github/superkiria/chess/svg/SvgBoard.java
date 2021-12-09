@@ -13,6 +13,8 @@ import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile
 
 public class SvgBoard {
 
+    private final static int FACTOR = 60;
+    
     private final SVGDocument document;
 
     private boolean hasPieces = false;
@@ -24,7 +26,7 @@ public class SvgBoard {
     public void importPiece(Node node, int x, int y) {
         Node imported = document.importNode(node, true);
         Attr transform = document.createAttribute("transform");
-        transform.setNodeValue("matrix(1.3333 0 0 1.3333 " + x * 60 + " " + y * 60 + ")");
+        transform.setNodeValue("matrix(1.33335 0 0 1.33335 " + x * FACTOR + " " + y * FACTOR + ")");
         ((Element) imported).setAttributeNode(transform);
         document.getRootElement().appendChild(imported);
         hasPieces = true;
@@ -35,13 +37,13 @@ public class SvgBoard {
         Attr fill = document.createAttribute("fill");
         fill.setNodeValue("#ffff00");
         Attr xAttr = document.createAttribute("x");
-        xAttr.setNodeValue(String.valueOf(x * 60));
+        xAttr.setNodeValue(String.valueOf(x * FACTOR));
         Attr yAttr = document.createAttribute("y");
-        yAttr.setNodeValue(String.valueOf(y * 60));
+        yAttr.setNodeValue(String.valueOf(y * FACTOR));
         Attr height = document.createAttribute("height");
-        height.setNodeValue(String.valueOf(60));
+        height.setNodeValue(String.valueOf(FACTOR));
         Attr width = document.createAttribute("width");
-        width.setNodeValue(String.valueOf(60));
+        width.setNodeValue(String.valueOf(FACTOR));
         Attr cl = document.createAttribute("class");
         cl.setNodeValue("highlight");
         Attr opacity = document.createAttribute("fill-opacity");

@@ -18,7 +18,7 @@ import java.io.*;
 
 public class SvgUtils {
 
-    private static final float SIZE = 960;
+    private static final float SIZE = 600;
 
     public static SAXSVGDocumentFactory saxsvgDocumentFactory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
 

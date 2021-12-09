@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         SvgBoardBuilder builder = new SvgBoardBuilder();
-        builder.setLastMoveInNotation("a1e4");
-        builder.setFen("8/6kp/7R/6Pp/r4P2/8/5K2/8 w - - 9 59");
+        builder.setLastMoveInNotation("b8d7");
+        builder.setFen("r1bqkb1r/pp1npppp/3p1n2/8/3P4/5N1P/PPP2PP1/RNBQKB1R w KQkq - 1 7");
         builder.init();
         System.out.println(documentToXmlString(builder.getDocument()));
         saveDocumentToPng(builder.getDocument());
