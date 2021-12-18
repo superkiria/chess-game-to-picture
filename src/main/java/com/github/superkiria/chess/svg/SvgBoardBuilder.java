@@ -25,8 +25,9 @@ public class SvgBoardBuilder {
         pieces.add(piece);
     }
 
-    private void initSvgBoard() throws IOException, URISyntaxException {
-        svgBoard = new SvgBoard();
+    private void initSvgBoard(Integer color) throws IOException, URISyntaxException {
+        color = color % 7 + 1;
+        svgBoard = new SvgBoard(color);
     }
 
     private void readFilesForPieces() throws IOException {
@@ -55,9 +56,9 @@ public class SvgBoardBuilder {
         }
     }
 
-    public void init() throws IOException, URISyntaxException {
+    public void init(Integer color) throws IOException, URISyntaxException {
         initPiecesFromFen();
-        initSvgBoard();
+        initSvgBoard(color);
         readFilesForPieces();
         highlightLastMove();
         placePiecesOnBoard();

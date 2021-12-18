@@ -19,8 +19,8 @@ public class SvgBoard {
 
     private boolean hasPieces = false;
 
-    public SvgBoard() throws IOException, URISyntaxException {
-        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("Chessboard480.svg").toString()));
+    public SvgBoard(Integer color) throws IOException, URISyntaxException {
+        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("Chessboard480-" + color + ".svg").toString()));
     }
 
     public void importPiece(Node node, int x, int y) {
@@ -47,7 +47,7 @@ public class SvgBoard {
         Attr cl = document.createAttribute("class");
         cl.setNodeValue("highlight");
         Attr opacity = document.createAttribute("fill-opacity");
-        opacity.setNodeValue("0.25");
+        opacity.setNodeValue("0.4");
         svgRect.setAttributeNode(fill);
         svgRect.setAttributeNode(xAttr);
         svgRect.setAttributeNode(yAttr);
@@ -56,15 +56,6 @@ public class SvgBoard {
         svgRect.setAttributeNode(cl);
         svgRect.setAttributeNode(opacity);
         document.getRootElement().getChildNodes().item(1).appendChild(svgRect);
-    }
-
-    public void flipBoard() {
-        if (hasPieces) {
-            throw new IllegalStateException("SvgBoard has pieces, could not be flipped");
-        }
-        Attr transform = document.createAttribute("transform");
-        transform.setNodeValue("rotate(90), translate(0 -480)");
-        ((Element) document.getRootElement().getChildNodes().item(1)).setAttributeNode(transform);
     }
 
     public SVGDocument getDocument() {
