@@ -1,5 +1,6 @@
 package com.github.superkiria.chess.svg;
 
+import com.github.superkiria.chess.color.ColorHelper;
 import com.github.superkiria.chess.fen.FenTools;
 import com.github.superkiria.chess.internal.PieceOnBoard;
 import com.github.superkiria.chess.pgn.PgnTools;
@@ -25,9 +26,9 @@ public class SvgBoardBuilder {
         pieces.add(piece);
     }
 
-    private void initSvgBoard(Integer color) throws IOException, URISyntaxException {
-        color = color % 7 + 1;
-        svgBoard = new SvgBoard(color);
+    private void initSvgBoard(int aCase) throws IOException, URISyntaxException {
+        svgBoard = new SvgBoard(Integer.toHexString(ColorHelper.getBlack(aCase)),
+                Integer.toHexString(ColorHelper.getWhite(aCase)));
     }
 
     private void readFilesForPieces() throws IOException {

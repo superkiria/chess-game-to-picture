@@ -21,7 +21,10 @@ public class PgnTools {
 
     public static String getLastMove(String pgn) {
         Game game = GameLoader.loadNextGame(Arrays.asList(pgn.split("\n")).listIterator());
-        return String.valueOf(game.getHalfMoves().getLast());
+        if (game.getHalfMoves().size() > 0) {
+            return String.valueOf(game.getHalfMoves().getLast());
+        }
+        return null;
     }
 
 }
