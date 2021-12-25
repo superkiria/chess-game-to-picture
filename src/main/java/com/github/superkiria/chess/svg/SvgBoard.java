@@ -19,8 +19,9 @@ public class SvgBoard {
 
     private boolean hasPieces = false;
 
-    public SvgBoard(Integer color) throws IOException, URISyntaxException {
-        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("Chessboard480-" + color + ".svg").toString()));
+    public SvgBoard(String black, String white) throws IOException, URISyntaxException {
+        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("empty.svg").toString()));
+        drawBoard(black, white);
     }
 
     public void importPiece(Node node, int x, int y) {
@@ -33,32 +34,48 @@ public class SvgBoard {
     }
 
     public void highlightSquare(int x, int y) {
-        Element svgRect = document.createElementNS("http://www.w3.org/2000/svg","rect");
-        Attr fill = document.createAttribute("fill");
-        fill.setNodeValue("#ffff00");
-        Attr xAttr = document.createAttribute("x");
-        xAttr.setNodeValue(String.valueOf(x * FACTOR));
-        Attr yAttr = document.createAttribute("y");
-        yAttr.setNodeValue(String.valueOf(y * FACTOR));
-        Attr height = document.createAttribute("height");
-        height.setNodeValue(String.valueOf(FACTOR));
-        Attr width = document.createAttribute("width");
-        width.setNodeValue(String.valueOf(FACTOR));
-        Attr cl = document.createAttribute("class");
-        cl.setNodeValue("highlight");
-        Attr opacity = document.createAttribute("fill-opacity");
-        opacity.setNodeValue("0.4");
-        svgRect.setAttributeNode(fill);
-        svgRect.setAttributeNode(xAttr);
-        svgRect.setAttributeNode(yAttr);
-        svgRect.setAttributeNode(height);
-        svgRect.setAttributeNode(width);
-        svgRect.setAttributeNode(cl);
-        svgRect.setAttributeNode(opacity);
-        document.getRootElement().getChildNodes().item(1).appendChild(svgRect);
+        drawRectangle(x * FACTOR, y * FACTOR, FACTOR, FACTOR, "ffff00", 40);
     }
 
     public SVGDocument getDocument() {
         return document;
     }
+
+    private void drawRectangle(int x, int y, int width, int height, String color) {
+        drawRectangle(x, y, width, height, color, 100);
+    }
+
+    private void drawRectangle(int x, int y, int width, int height, String color, int opacity) {
+        Element svgRect = document.createElementNS("http://www.w3.org/2000/svg","rect");
+
+        addAttributeToDocument(document, svgRect, "fill", "#" + color);
+        addAttributeToDocument(document, svgRect, "x", String.valueOf(x));
+        addAttributeToDocument(document, svgRect, "y", String.valueOf(y));
+        addAttributeToDocument(document, svgRect, "height", String.valueOf(height));
+        addAttributeToDocument(document, svgRect, "width", String.valueOf(width));
+
+        if (opacity < 100) {
+            addAttributeToDocument(document, svgRect, "opacity", String.valueOf(opacity / 100.));
+        }
+
+        document.getRootElement().getChildNodes().item(1).appendChild(svgRect);
+    }
+
+    private void addAttributeToDocument(SVGDocument document, Element element, String attribute, String value) {
+        Attr attr = document.createAttribute(attribute);
+        attr.setNodeValue(value);
+        element.setAttributeNode(attr);
+    }
+
+    private void drawBoard(String black, String white) {
+        drawRectangle(0,0, FACTOR * 8, FACTOR * 8, black);
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if ((i + j) % 2 == 0) {
+                    drawRectangle(i * FACTOR, j * FACTOR, FACTOR, FACTOR, white);
+                }
+            }
+        }
+    }
+
 }
