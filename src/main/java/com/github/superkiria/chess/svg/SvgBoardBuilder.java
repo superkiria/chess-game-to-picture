@@ -1,6 +1,6 @@
 package com.github.superkiria.chess.svg;
 
-import com.github.superkiria.chess.color.RandomColorHelper;
+import com.github.superkiria.chess.color.ColorHelper;
 import com.github.superkiria.chess.fen.FenTools;
 import com.github.superkiria.chess.internal.PieceOnBoard;
 import com.github.superkiria.chess.pgn.PgnTools;
@@ -27,8 +27,8 @@ public class SvgBoardBuilder {
     }
 
     private void initSvgBoard(int aCase) throws IOException, URISyntaxException {
-        svgBoard = new SvgBoard(Integer.toHexString(RandomColorHelper.getRandomBlack(aCase)),
-                Integer.toHexString(RandomColorHelper.getRandomWhite(aCase)));
+        svgBoard = new SvgBoard(Integer.toHexString(ColorHelper.getBlack(aCase)),
+                Integer.toHexString(ColorHelper.getWhite(aCase)));
     }
 
     private void readFilesForPieces() throws IOException {
