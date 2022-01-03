@@ -10,34 +10,43 @@ public class ColorHelper {
     private static final int W_MID = 240;
     private static final int W_MAX = 250;
 
-    private static int[][] blackColors = {
+    private static final int[][] blackColors = {
             {MIN, MIN, MAX},
             {MIN, MAX, MIN},
             {MAX, MIN, MIN},
-            {MID, MIN, MAX},
-            {MIN, MAX, MID},
-            {MAX, MID, MIN},
-            {MIN, MID, MAX},
-            {MID, MAX, MIN},
-            {MAX, MIN, MID},
+
             {MIN, MAX, MAX},
             {MAX, MAX, MIN},
             {MAX, MIN, MAX},
+
+            {MAX, MID, MIN},
+            {MIN, MAX, MID},
+            {MID, MIN, MAX},
+
+            {MAX, MIN, MID},
+            {MID, MAX, MIN},
+            {MIN, MID, MAX},
+
     };
 
-    private static int[][] whiteColors = {
+    private static final int[][] whiteColors = {
+
             {W_MIN, W_MIN, W_MAX},
             {W_MIN, W_MAX, W_MIN},
             {W_MAX, W_MIN, W_MIN},
-            {W_MID, W_MIN, W_MAX},
-            {W_MIN, W_MAX, W_MID},
-            {W_MAX, W_MID, W_MIN},
-            {W_MIN, W_MID, W_MAX},
-            {W_MID, W_MAX, W_MIN},
-            {W_MAX, W_MIN, W_MID},
+
             {W_MIN, W_MAX, W_MAX},
             {W_MAX, W_MAX, W_MIN},
             {W_MAX, W_MIN, W_MAX},
+
+            {W_MAX, W_MID, W_MIN},
+            {W_MIN, W_MAX, W_MID},
+            {W_MID, W_MIN, W_MAX},
+
+            {W_MAX, W_MIN, W_MID},
+            {W_MID, W_MAX, W_MIN},
+            {W_MIN, W_MID, W_MAX},
+
     };
 
     public static int getBlack(int dominant) {

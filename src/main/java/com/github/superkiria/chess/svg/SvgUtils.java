@@ -22,7 +22,7 @@ public class SvgUtils {
 
     public static SAXSVGDocumentFactory saxsvgDocumentFactory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
 
-    public static void saveDocumentToPng(Document document) throws Exception {
+    public static void saveDocumentToPng(Document document, String fileName) throws Exception {
 
         // Create a JPEGTranscoder and set its quality hint.
         PNGTranscoder transcoder = new PNGTranscoder();
@@ -31,7 +31,7 @@ public class SvgUtils {
 
         // Set the transcoder input and output.
         TranscoderInput input = new TranscoderInput(document);
-        OutputStream ostream = new FileOutputStream("target/out.png");
+        OutputStream ostream = new FileOutputStream("target/" + fileName);
         TranscoderOutput output = new TranscoderOutput(ostream);
 
         // Perform the transcoding.
