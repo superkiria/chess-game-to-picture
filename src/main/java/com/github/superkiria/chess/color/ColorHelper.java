@@ -6,7 +6,8 @@ public class ColorHelper {
     private static final int MID = 180;
     private static final int MAX = 220;
 
-    private static final int W_MAX = 248;
+    private static final int W_MAX = 252;
+    private static final int W_FIX = 5;
 
     private static final int[][] blackColors = {
             {MIN + 20, 137, 255},
@@ -29,21 +30,21 @@ public class ColorHelper {
 
     private static final int[][] whiteColors = {
 
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
+            {W_MAX - W_FIX, W_MAX - W_FIX * 2, W_MAX},
+            {W_MAX - W_FIX * 2, W_MAX, W_MAX - W_FIX * 2},
+            {W_MAX, W_MAX - W_FIX * 2, W_MAX - W_FIX * 2},
 
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
+            {W_MAX - W_FIX * 2, W_MAX, W_MAX},
+            {W_MAX, W_MAX, W_MAX - W_FIX * 2},
+            {W_MAX, W_MAX - W_FIX * 2, W_MAX},
 
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
+            {W_MAX, W_MAX - W_FIX, W_MAX - W_FIX * 2},
+            {W_MAX - W_FIX * 2, W_MAX, W_MAX - W_FIX},
+            {W_MAX - W_FIX, W_MAX - W_FIX * 2, W_MAX},
 
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
-            {W_MAX, W_MAX, W_MAX},
+            {W_MAX, W_MAX - W_FIX * 2, W_MAX - W_FIX},
+            {W_MAX - W_FIX, W_MAX, W_MAX - W_FIX * 2},
+            {W_MAX - W_FIX * 2, W_MAX - W_FIX, W_MAX},
 
     };
 
