@@ -1,4 +1,4 @@
-package com.github.superkiria.chess.pgn;
+package com.github.superkiria.chess.tools;
 
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.game.Game;

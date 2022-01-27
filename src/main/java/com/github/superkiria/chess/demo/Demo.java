@@ -1,11 +1,11 @@
-package com.github.superkiria;
+package com.github.superkiria.chess.demo;
 
 import com.github.superkiria.chess.svg.SvgBoardBuilder;
 
 import static com.github.superkiria.chess.svg.SvgUtils.documentToXmlString;
 import static com.github.superkiria.chess.svg.SvgUtils.saveDocumentToPng;
 
-public class Main {
+public class Demo {
 
     public static void main(String[] args) throws Exception {
         for (int i = 0; i < 12; i++) {

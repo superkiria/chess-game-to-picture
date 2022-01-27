@@ -1,4 +1,4 @@
-package com.github.superkiria.chess.internal;
+package com.github.superkiria.chess.model;
 
 public class PieceOnBoard {
 

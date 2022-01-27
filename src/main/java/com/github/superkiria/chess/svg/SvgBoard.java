@@ -20,7 +20,7 @@ public class SvgBoard {
     private boolean hasPieces = false;
 
     public SvgBoard(String black, String white) throws IOException, URISyntaxException {
-        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("empty.svg").toString()));
+        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("svg/empty.svg").toString()));
         drawBoard(black, white);
     }
 

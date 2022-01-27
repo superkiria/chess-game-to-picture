@@ -1,6 +1,6 @@
-package com.github.superkiria.chess.fen;
+package com.github.superkiria.chess.tools;
 
-import com.github.superkiria.chess.internal.PieceOnBoard;
+import com.github.superkiria.chess.model.PieceOnBoard;
 
 import java.util.ArrayList;
 import java.util.List;
