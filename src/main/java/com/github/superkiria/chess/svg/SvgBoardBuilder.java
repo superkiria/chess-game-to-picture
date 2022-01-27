@@ -1,9 +1,9 @@
 package com.github.superkiria.chess.svg;
 
 import com.github.superkiria.chess.color.ColorHelper;
-import com.github.superkiria.chess.fen.FenTools;
-import com.github.superkiria.chess.internal.PieceOnBoard;
-import com.github.superkiria.chess.pgn.PgnTools;
+import com.github.superkiria.chess.tools.FenTools;
+import com.github.superkiria.chess.model.PieceOnBoard;
+import com.github.superkiria.chess.tools.PgnTools;
 import org.w3c.dom.svg.SVGDocument;
 
 import java.io.File;
@@ -19,7 +19,7 @@ public class SvgBoardBuilder {
     private String lastMoveInNotation;
     private SvgBoard svgBoard;
     private List<PieceOnBoard> pieces;
-    private EnumMap<SvgFilesForPieces, SvgPiece> filesForPieces = new EnumMap<>(SvgFilesForPieces.class);
+    private EnumMap<SvgFileNames, SvgPiece> filesForPieces = new EnumMap<>(SvgFileNames.class);
     private boolean isFilesForPiecesInitialized = false;
 
     public void placePiece(PieceOnBoard piece) {
@@ -32,7 +32,7 @@ public class SvgBoardBuilder {
     }
 
     private void readFilesForPieces() throws IOException {
-        for (SvgFilesForPieces entry : SvgFilesForPieces.values()) {
+        for (SvgFileNames entry : SvgFileNames.values()) {
             filesForPieces.put(entry, new SvgPiece(new File(getClass().getClassLoader().getResource(entry.getFileName()).toString())));
         }
         isFilesForPiecesInitialized = true;
@@ -53,7 +53,7 @@ public class SvgBoardBuilder {
             throw new IllegalStateException("No pieces to put on board.");
         }
         for (PieceOnBoard piece : pieces) {
-            svgBoard.importPiece(filesForPieces.get(SvgFilesForPieces.valueOf(piece.getPiece())).getDocumentNode(), piece.getX(), piece.getY());
+            svgBoard.importPiece(filesForPieces.get(SvgFileNames.valueOf(piece.getPiece())).getDocumentNode(), piece.getX(), piece.getY());
         }
     }
 
