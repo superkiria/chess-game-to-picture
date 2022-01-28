@@ -8,26 +8,27 @@ import org.w3c.dom.svg.SVGDocument;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile;
 
 public class SvgBoard {
 
-    private final static int FACTOR = 60;
+    private final static int FACTOR = 45;
     
     private final SVGDocument document;
 
     private boolean hasPieces = false;
 
-    public SvgBoard(String black, String white) throws IOException, URISyntaxException {
-        document = createSVGDocumentFromFile(new File(getClass().getClassLoader().getResource("svg/empty.svg").toString()));
+    public SvgBoard(String black, String white) throws IOException {
+        document = createSVGDocumentFromFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource("svg/empty.svg")).toString()));
         drawBoard(black, white);
     }
 
     public void importPiece(Node node, int x, int y) {
         Node imported = document.importNode(node, true);
         Attr transform = document.createAttribute("transform");
-        transform.setNodeValue("matrix(1.33335 0 0 1.33335 " + x * FACTOR + " " + y * FACTOR + ")");
+        transform.setNodeValue("matrix(1 0 0 1 " + x * FACTOR + " " + y * FACTOR + ")");
         ((Element) imported).setAttributeNode(transform);
         document.getRootElement().appendChild(imported);
         hasPieces = true;

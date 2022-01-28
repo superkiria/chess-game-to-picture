@@ -2,47 +2,43 @@ package com.github.superkiria.chess.color;
 
 public class ColorHelper {
 
-    private static final int MIN = 140;
-    private static final int MID = 180;
-    private static final int MAX = 220;
-
     private static final int W_MAX = 255;
     private static final int W_FIX = 10;
 
     private static final int[][] blackColors = {
-            {MIN + 20, 137, 255},
-            {118, 200, 118},
-            {MAX, MIN, MIN},
+            {166, 146, 240},
+            {130, 198, 130},
+            {220, 156, 156},
 
-            {103, 192, 192},
-            {192, 192, 103},
-            {MAX, MIN, MAX},
+            {123, 192, 192},
+            {192, 192, 123},
+            {220, 157, 220},
 
-            {MAX - 5, MID - 5, MIN - 5},
-            {110, 200, 155},
-            {200, 137, 245},
+            {215, 178, 140},
+            {120, 200, 160},
+            {208, 153, 245},
 
-            {MAX, MIN, MID},
-            {150, 200, 105},
-            {110, 172, MAX},
+            {220, 144, 182},
+            {156, 200, 111},
+            {110, 172, 220},
 
     };
 
     private static final int[][] whiteColors = {
 
-            {W_MAX - W_FIX, W_MAX - W_FIX * 2, W_MAX},
-            {W_MAX - W_FIX * 2, W_MAX, W_MAX - W_FIX * 2},
-            {W_MAX, W_MAX - W_FIX * 2, W_MAX - W_FIX * 2},
+            {W_MAX - W_FIX, W_MAX - W_FIX, W_MAX},
+            {W_MAX - W_FIX, W_MAX, W_MAX - W_FIX * 2},
+            {W_MAX, W_MAX - W_FIX, W_MAX - W_FIX * 2},
 
-            {W_MAX - W_FIX * 2, W_MAX, W_MAX - W_FIX * 2},
+            {W_MAX - W_FIX, W_MAX, W_MAX - W_FIX * 2},
             {W_MAX, W_MAX, W_MAX - W_FIX * 2},
-            {W_MAX, W_MAX - W_FIX * 2, W_MAX - W_FIX * 2},
+            {W_MAX, W_MAX - W_FIX, W_MAX - W_FIX * 2},
 
             {W_MAX, W_MAX - W_FIX, W_MAX - W_FIX * 2},
-            {W_MAX - W_FIX * 2, W_MAX, W_MAX - W_FIX * 2},
-            {W_MAX - W_FIX, W_MAX - W_FIX * 2, W_MAX},
+            {W_MAX - W_FIX, W_MAX, W_MAX - W_FIX * 2},
+            {W_MAX - W_FIX, W_MAX - W_FIX, W_MAX - W_FIX * 2},
 
-            {W_MAX, W_MAX - W_FIX * 2, W_MAX - W_FIX * 2},
+            {W_MAX, W_MAX - W_FIX, W_MAX - W_FIX * 2},
             {W_MAX - W_FIX, W_MAX, W_MAX - W_FIX * 2},
             {W_MAX - W_FIX * 2, W_MAX - W_FIX, W_MAX - W_FIX * 2},
 

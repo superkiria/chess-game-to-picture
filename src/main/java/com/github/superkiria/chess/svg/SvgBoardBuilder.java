@@ -19,8 +19,7 @@ public class SvgBoardBuilder {
     private String lastMoveInNotation;
     private SvgBoard svgBoard;
     private List<PieceOnBoard> pieces;
-    private EnumMap<SvgFileNames, SvgPiece> filesForPieces = new EnumMap<>(SvgFileNames.class);
-    private boolean isFilesForPiecesInitialized = false;
+    private final EnumMap<SvgFileNames, SvgPiece> filesForPieces = new EnumMap<>(SvgFileNames.class);
 
     public void placePiece(PieceOnBoard piece) {
         pieces.add(piece);
@@ -35,7 +34,6 @@ public class SvgBoardBuilder {
         for (SvgFileNames entry : SvgFileNames.values()) {
             filesForPieces.put(entry, new SvgPiece(new File(getClass().getClassLoader().getResource(entry.getFileName()).toString())));
         }
-        isFilesForPiecesInitialized = true;
     }
 
     private void initPiecesFromFen() {
