@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Objects;
 
 public class SvgBoardBuilder {
 
@@ -32,7 +33,7 @@ public class SvgBoardBuilder {
 
     private void readFilesForPieces() throws IOException {
         for (SvgFileNames entry : SvgFileNames.values()) {
-            filesForPieces.put(entry, new SvgPiece(new File(getClass().getClassLoader().getResource(entry.getFileName()).toString())));
+            filesForPieces.put(entry, new SvgPiece(Objects.requireNonNull(getClass().getClassLoader().getResource(entry.getFileName())).toString()));
         }
     }
 

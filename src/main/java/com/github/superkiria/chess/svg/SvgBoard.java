@@ -5,9 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.svg.SVGDocument;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Objects;
 
 import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile;
@@ -18,10 +16,8 @@ public class SvgBoard {
     
     private final SVGDocument document;
 
-    private boolean hasPieces = false;
-
     public SvgBoard(String black, String white) throws IOException {
-        document = createSVGDocumentFromFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource("svg/empty.svg")).toString()));
+        document = createSVGDocumentFromFile(Objects.requireNonNull(getClass().getClassLoader().getResource("svg/empty.svg")).toString());
         drawBoard(black, white);
     }
 
@@ -31,7 +27,6 @@ public class SvgBoard {
         transform.setNodeValue("matrix(1 0 0 1 " + x * FACTOR + " " + y * FACTOR + ")");
         ((Element) imported).setAttributeNode(transform);
         document.getRootElement().appendChild(imported);
-        hasPieces = true;
     }
 
     public void highlightSquare(int x, int y) {

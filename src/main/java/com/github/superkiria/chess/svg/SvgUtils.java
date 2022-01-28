@@ -73,8 +73,8 @@ public class SvgUtils {
         return writer.toString();
     }
 
-    public static SVGDocument createSVGDocumentFromFile(File file) throws IOException {
-        return saxsvgDocumentFactory.createSVGDocument(file.toString());
+    public static SVGDocument createSVGDocumentFromFile(String uri) throws IOException {
+        return saxsvgDocumentFactory.createSVGDocument(uri);
     }
 
 }

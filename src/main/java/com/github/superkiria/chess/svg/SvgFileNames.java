@@ -15,8 +15,8 @@ public enum SvgFileNames {
     n ("n", "svg/ndt45.svg"),
     p ("p", "svg/pdt45.svg");
 
-    private String pgnLetter;
-    private String fileName;
+    private final String pgnLetter;
+    private final String fileName;
 
     SvgFileNames(String pgnLetter, String fileName) {
         this.pgnLetter = pgnLetter;
