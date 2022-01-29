@@ -1,12 +1,11 @@
 package com.github.superkiria.chess.svg;
 
-import com.github.superkiria.chess.color.ColorHelper;
+import com.github.superkiria.chess.color.BoardColor;
 import com.github.superkiria.chess.tools.FenTools;
 import com.github.superkiria.chess.model.PieceOnBoard;
 import com.github.superkiria.chess.tools.PgnTools;
 import org.w3c.dom.svg.SVGDocument;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.EnumMap;
@@ -27,8 +26,8 @@ public class SvgBoardBuilder {
     }
 
     private void initSvgBoard(int aCase) throws IOException, URISyntaxException {
-        svgBoard = new SvgBoard(Integer.toHexString(ColorHelper.getBlack(aCase)),
-                Integer.toHexString(ColorHelper.getWhite(aCase)));
+        svgBoard = new SvgBoard(Integer.toHexString(BoardColor.getBlack(aCase)),
+                Integer.toHexString(BoardColor.getWhite(aCase)));
     }
 
     private void readFilesForPieces() throws IOException {
