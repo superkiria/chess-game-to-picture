@@ -1,36 +1,91 @@
-package com.github.superkiria.chess.svg;
+package com.github.superkiria.chess;
 
 import com.github.superkiria.chess.color.BoardColor;
-import com.github.superkiria.chess.tools.FenTools;
 import com.github.superkiria.chess.model.PieceOnBoard;
+import com.github.superkiria.chess.svg.SvgBoard;
+import com.github.superkiria.chess.svg.SvgFileNames;
+import com.github.superkiria.chess.svg.SvgPiece;
+import com.github.superkiria.chess.tools.FenTools;
 import com.github.superkiria.chess.tools.PgnTools;
 import org.w3c.dom.svg.SVGDocument;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.ByteArrayOutputStream;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Objects;
 
-public class SvgBoardBuilder {
+public class ChessPic {
 
     private String pgn;
-    private String fen;
     private String lastMoveInNotation;
     private SvgBoard svgBoard;
     private List<PieceOnBoard> pieces;
-    private final EnumMap<SvgFileNames, SvgPiece> filesForPieces = new EnumMap<>(SvgFileNames.class);
+
+    private final SVGDocument empty;
+    private final EnumMap<SvgFileNames, SvgPiece> filesForPieces;
+    private final BoardColor color;
+
+    private String fen;
+    private String lastMove;
+
+    protected ChessPic(SVGDocument empty, EnumMap<SvgFileNames, SvgPiece> filesForPieces, BoardColor color) {
+        this.empty = empty;
+        this.filesForPieces = filesForPieces;
+        this.color = color;
+    }
+
+    public void setPositionFromPgn(String pgn) {
+        setPositionFromPgn(pgn, false);
+    }
+
+    public void setPositionFromPgn(String pgn, boolean highlightLastMove) {
+        this.fen = PgnTools.convertPgnToFen(pgn);
+        if (highlightLastMove) {
+            this.lastMove = PgnTools.getLastMove(pgn);
+        }
+    }
+
+    public void setPositionFromFen(String fen) {
+        this.fen = fen;
+    }
+
+    public void setPositionFromFen(String fen, String moveToHighlight) {
+        this.fen = fen;
+        this.lastMove = moveToHighlight;
+    }
+
+    public void addPiece(String piece) {
+
+    }
+
+    public void highlightField(String move) {
+
+    }
+
+    public SVGDocument getDocument() {
+        this.setLastMoveInNotation(lastMove);
+        this.init(0);
+        return svgBoard.getDocument();
+    }
+
+    public String getXmlDocument() {
+        return "";
+    }
+
+    public ByteArrayOutputStream generatePng() {
+        return null;
+    }
 
     public void placePiece(PieceOnBoard piece) {
         pieces.add(piece);
     }
 
-    private void initSvgBoard(int aCase) throws IOException, URISyntaxException {
+    private void initSvgBoard(int aCase) {
         svgBoard = new SvgBoard(Integer.toHexString(BoardColor.getBlack(aCase)),
                 Integer.toHexString(BoardColor.getWhite(aCase)));
     }
 
-    private void readFilesForPieces() throws IOException {
+    private void readFilesForPieces() {
         for (SvgFileNames entry : SvgFileNames.values()) {
             filesForPieces.put(entry, new SvgPiece(Objects.requireNonNull(getClass().getClassLoader().getResource(entry.getFileName())).toString()));
         }
@@ -55,7 +110,7 @@ public class SvgBoardBuilder {
         }
     }
 
-    public void init(Integer color) throws IOException, URISyntaxException {
+    public void init(Integer color) {
         initPiecesFromFen();
         initSvgBoard(color);
         readFilesForPieces();
@@ -73,7 +128,7 @@ public class SvgBoardBuilder {
     }
 
     private String letterToCoordinates(String letter) {
-         switch (letter) {
+        switch (letter) {
             case "a": return "0";
             case "b": return "1";
             case "c": return "2";
@@ -98,10 +153,6 @@ public class SvgBoardBuilder {
 
     public void setLastMoveInNotation(String notation) {
         this.lastMoveInNotation = notation;
-    }
-
-    public SVGDocument getDocument() {
-        return svgBoard.getDocument();
     }
 
 }

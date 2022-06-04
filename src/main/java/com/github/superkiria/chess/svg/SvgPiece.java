@@ -11,7 +11,7 @@ public class SvgPiece {
 
     SVGDocument document;
 
-    public SvgPiece(String uri) throws IOException {
+    public SvgPiece(String uri) {
         this.document = createSVGDocumentFromFile(uri);
     }
 

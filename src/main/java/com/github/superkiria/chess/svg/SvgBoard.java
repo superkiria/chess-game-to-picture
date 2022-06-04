@@ -5,7 +5,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.svg.SVGDocument;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile;
@@ -16,7 +15,7 @@ public class SvgBoard {
     
     private final SVGDocument document;
 
-    public SvgBoard(String black, String white) throws IOException {
+    public SvgBoard(String black, String white) {
         document = createSVGDocumentFromFile(Objects.requireNonNull(getClass().getClassLoader().getResource("svg/empty.svg")).toString());
         drawBoard(black, white);
     }
