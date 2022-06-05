@@ -12,8 +12,6 @@ import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile
 
 public class ChessPicFactory {
 
-    private static final BoardColor DEFAULT_COLOR = BoardColor.BLUE_JEANS;
-
     private final SVGDocument empty;
     private final EnumMap<SvgFileNames, SvgPiece> filesForPieces = new EnumMap<>(SvgFileNames.class);
 
@@ -25,7 +23,7 @@ public class ChessPicFactory {
     }
 
     public ChessPic empty() {
-        return new ChessPic(empty, filesForPieces, DEFAULT_COLOR);
+        return new ChessPic(empty, filesForPieces);
     }
 
 
