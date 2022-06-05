@@ -20,17 +20,22 @@ public class ChessPic {
 
     private static final BoardColor DEFAULT_COLOR = BoardColor.BLUE_JEANS;
 
-    private String lastMove;
-    private SvgBoard svgBoard;
-    private List<PieceOnBoard> pieces = new ArrayList<>();
-    private List<HighlightedField> highlightedFields = new ArrayList<>();
-
     private final SVGDocument empty;
     private final EnumMap<SvgFileNames, SvgPiece> filesForPieces;
+
+    private String lastMove;
+    private SvgBoard svgBoard;
+    private List<PieceOnBoard> pieces;
+    private List<HighlightedField> highlightedFields;
 
     protected ChessPic(SVGDocument empty, EnumMap<SvgFileNames, SvgPiece> filesForPieces) {
         this.empty = empty;
         this.filesForPieces = filesForPieces;
+    }
+
+    /* SETTING POSITIONS */
+    public void startWithBlank(String pgn) {
+        pieces = new ArrayList<>();
     }
 
     public void setPositionFromPgn(String pgn) {
@@ -48,17 +53,38 @@ public class ChessPic {
         pieces = FenTools.fenToPiecesOnBoard(fen);
     }
 
-    public void setMoveToHighLight(String fen, String moveToHighlight) {
-        this.lastMove = moveToHighlight;
+    /* ADDING A PIECE */
+    public void addPiece(String notation) {
+
     }
 
-    public void addPiece(String piece) {
+    public void addPiece(String x, int y, String piece) {
 
+    }
+
+    public void addPiece(int x, int y, String piece) {
+        placePiece(new PieceOnBoard(x, y, piece));
+    }
+
+    public void placePiece(PieceOnBoard piece) {
+        pieces.add(piece);
+    }
+
+    /* HIGHLIGHTS */
+    public void setMoveToHighLight(String fen, String moveToHighlight) {
+        this.lastMove = moveToHighlight;
     }
 
     public void highlightField(String move) {
 
     }
+
+    public void setLastMoveInNotation(String lastMoveInNotation) {
+        this.lastMove = lastMoveInNotation;
+        highlightLastMove();
+    }
+
+    /* RESULST */
 
     public SVGDocument getDocument() {
         this.setLastMoveInNotation(lastMove);
@@ -74,9 +100,14 @@ public class ChessPic {
         return null;
     }
 
-    public void placePiece(PieceOnBoard piece) {
-        pieces.add(piece);
+    public void init(Integer color) {
+        initSvgBoard(color);
+        readFilesForPieces();
+        highlightLastMove();
+        placePiecesOnBoard();
     }
+
+    /* PRIVATE */
 
     private void initSvgBoard(int aCase) {
         svgBoard = new SvgBoard(Integer.toHexString(BoardColor.getBlack(aCase)),
@@ -96,13 +127,6 @@ public class ChessPic {
         for (PieceOnBoard piece : pieces) {
             svgBoard.importPiece(filesForPieces.get(SvgFileNames.valueOf(piece.getPiece())).getDocumentNode(), piece.getX(), piece.getY());
         }
-    }
-
-    public void init(Integer color) {
-        initSvgBoard(color);
-        readFilesForPieces();
-        highlightLastMove();
-        placePiecesOnBoard();
     }
 
     private void highlightLastMove() {
@@ -126,11 +150,6 @@ public class ChessPic {
             case "h": return "7";
             default: return null;
         }
-    }
-
-    public void setLastMoveInNotation(String lastMoveInNotation) {
-        this.lastMove = lastMoveInNotation;
-        highlightLastMove();
     }
 
 }

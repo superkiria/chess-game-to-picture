@@ -1,6 +1,5 @@
 package com.github.superkiria.chess;
 
-import com.github.superkiria.chess.color.BoardColor;
 import com.github.superkiria.chess.svg.SvgFileNames;
 import com.github.superkiria.chess.svg.SvgPiece;
 import org.w3c.dom.svg.SVGDocument;
