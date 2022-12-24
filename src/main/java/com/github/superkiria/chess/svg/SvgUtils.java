@@ -1,5 +1,6 @@
 package com.github.superkiria.chess.svg;
 
+import com.github.superkiria.chess.ChessPicException;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
@@ -73,8 +74,12 @@ public class SvgUtils {
         return writer.toString();
     }
 
-    public static SVGDocument createSVGDocumentFromFile(String uri) throws IOException {
-        return saxsvgDocumentFactory.createSVGDocument(uri);
+    public static SVGDocument createSVGDocumentFromFile(String uri) {
+        try {
+            return saxsvgDocumentFactory.createSVGDocument(uri);
+        } catch (IOException e) {
+            throw new ChessPicException(e);
+        }
     }
 
 }
