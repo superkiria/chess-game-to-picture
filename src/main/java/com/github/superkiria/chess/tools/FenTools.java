@@ -26,12 +26,8 @@ public class FenTools {
                 y++;
             }
             if (PIECES.contains(c.toUpperCase())) {
-                PieceOnBoard piece = new PieceOnBoard();
-                piece.setPiece(c);
-                piece.setX(x);
-                piece.setY(y);
+                list.add(new PieceOnBoard(c, x, y));
                 x++;
-                list.add(piece);
             }
             position++;
         }

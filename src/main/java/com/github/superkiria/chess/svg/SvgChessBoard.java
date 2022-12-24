@@ -9,13 +9,13 @@ import java.util.Objects;
 
 import static com.github.superkiria.chess.svg.SvgUtils.createSVGDocumentFromFile;
 
-public class SvgBoard {
+public class SvgChessBoard {
 
     private final static int FACTOR = 45;
     
     private final SVGDocument document;
 
-    public SvgBoard(String black, String white) {
+    public SvgChessBoard(String black, String white) {
         document = createSVGDocumentFromFile(Objects.requireNonNull(getClass().getClassLoader().getResource("svg/empty.svg")).toString());
         drawBoard(black, white);
     }

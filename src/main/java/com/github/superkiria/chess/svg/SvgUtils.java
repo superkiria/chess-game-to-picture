@@ -2,6 +2,7 @@ package com.github.superkiria.chess.svg;
 
 import com.github.superkiria.chess.ChessPicException;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
+import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
@@ -41,37 +42,42 @@ public class SvgUtils {
         ostream.close();
     }
 
-    public static ByteArrayOutputStream saveDocumentToPngByteBuffer(Document document) throws Exception {
+    public static ByteArrayOutputStream saveDocumentToPngByteBuffer(Document document) {
 
-        // Create a JPEGTranscoder and set its quality hint.
         PNGTranscoder transcoder = new PNGTranscoder();
         transcoder.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, SIZE);
         transcoder.addTranscodingHint(PNGTranscoder.KEY_WIDTH, SIZE);
 
-        // Set the transcoder input and output.
         TranscoderInput input = new TranscoderInput(document);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         TranscoderOutput output = new TranscoderOutput(outputStream);
 
-        // Perform the transcoding.
-        transcoder.transcode(input, output);
+        try {
+            transcoder.transcode(input, output);
+        } catch (TranscoderException e) {
+            throw new ChessPicException(e);
+        }
 
         return outputStream;
     }
 
-    public static String documentToXmlString(Document doc) throws TransformerException {
-        TransformerFactory transfac = TransformerFactory.newInstance();
-        Transformer transformer = transfac.newTransformer();
-        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(2));
+    public static String documentToXmlString(Document doc) {
+        try {
+            TransformerFactory transfac = TransformerFactory.newInstance();
+            Transformer transformer = transfac.newTransformer();
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(2));
 
-        StringWriter writer = new StringWriter();
-        StreamResult result = new StreamResult(writer);
-        DOMSource source = new DOMSource(doc.getDocumentElement());
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+            DOMSource source = new DOMSource(doc.getDocumentElement());
 
-        transformer.transform(source, result);
-        return writer.toString();
+            transformer.transform(source, result);
+            return writer.toString();
+        } catch (TransformerException e) {
+            throw new ChessPicException(e);
+        }
     }
 
     public static SVGDocument createSVGDocumentFromFile(String uri) {

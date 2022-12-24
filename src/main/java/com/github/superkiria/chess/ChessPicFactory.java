@@ -18,15 +18,19 @@ public class ChessPicFactory {
     private final EnumMap<SvgFileNames, SvgPiece> filesForPieces = new EnumMap<>(SvgFileNames.class);
 
     public ChessPicFactory() {
+        // избавиться от ссылки на empty
         empty = createSVGDocumentFromFile(Objects.requireNonNull(getClass().getClassLoader().getResource("svg/empty.svg")).toString());
         for (SvgFileNames entry : SvgFileNames.values()) {
             filesForPieces.put(entry, new SvgPiece(Objects.requireNonNull(getClass().getClassLoader().getResource(entry.getFileName())).toString()));
         }
     }
 
-    public ChessPic empty() {
-        return new ChessPic(empty, filesForPieces, DEFAULT_COLOR);
+    public ChessPic newPicture() {
+        return new ChessPic(filesForPieces, DEFAULT_COLOR);
     }
 
+    public ChessPic newPicture(BoardColor boardColor) {
+        return new ChessPic(filesForPieces, boardColor);
+    }
 
 }

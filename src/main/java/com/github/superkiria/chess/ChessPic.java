@@ -1,37 +1,39 @@
 package com.github.superkiria.chess;
 
 import com.github.superkiria.chess.color.BoardColor;
+import com.github.superkiria.chess.model.HighlightOnBoard;
 import com.github.superkiria.chess.model.PieceOnBoard;
-import com.github.superkiria.chess.svg.SvgBoard;
+import com.github.superkiria.chess.svg.SvgChessBoard;
 import com.github.superkiria.chess.svg.SvgFileNames;
 import com.github.superkiria.chess.svg.SvgPiece;
-import com.github.superkiria.chess.tools.FenTools;
+import com.github.superkiria.chess.svg.SvgUtils;
 import com.github.superkiria.chess.tools.PgnTools;
 import org.w3c.dom.svg.SVGDocument;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Objects;
 
+import static com.github.superkiria.chess.tools.FenTools.fenToPiecesOnBoard;
+import static com.github.superkiria.chess.tools.ParsingTools.letterToCoordinates;
+
 public class ChessPic {
 
-    private String pgn;
-    private String lastMoveInNotation;
-    private SvgBoard svgBoard;
-    private List<PieceOnBoard> pieces;
-
-    private final SVGDocument empty;
     private final EnumMap<SvgFileNames, SvgPiece> filesForPieces;
+    private final List<PieceOnBoard> pieces;
+    private final List<HighlightOnBoard> highlights;
+    private final SvgChessBoard svgChessBoard;
     private final BoardColor color;
 
-    private String fen;
-    private String lastMove;
-
-    protected ChessPic(SVGDocument empty, EnumMap<SvgFileNames, SvgPiece> filesForPieces, BoardColor color) {
-        this.empty = empty;
+    protected ChessPic(EnumMap<SvgFileNames, SvgPiece> filesForPieces, BoardColor color) {
         this.filesForPieces = filesForPieces;
         this.color = color;
+        this.pieces = new ArrayList<>();
+        this.highlights = new ArrayList<>();
+        this.svgChessBoard = new SvgChessBoard(Integer.toHexString(color.getBlack().getColor()),
+                Integer.toHexString(BoardColor.getWhite(color.getWhite().getColor())));
     }
 
     public void setPositionFromPgn(String pgn) {
@@ -39,120 +41,71 @@ public class ChessPic {
     }
 
     public void setPositionFromPgn(String pgn, boolean highlightLastMove) {
-        this.fen = PgnTools.convertPgnToFen(pgn);
+        pieces.addAll(fenToPiecesOnBoard(PgnTools.convertPgnToFen(pgn)));
         if (highlightLastMove) {
-            this.lastMove = PgnTools.getLastMove(pgn);
+            String lastMove = PgnTools.getLastMove(pgn);
+            if (lastMove != null) {
+                highlightMove(lastMove);
+            }
         }
     }
 
     public void setPositionFromFen(String fen) {
-        this.fen = fen;
+        pieces.addAll(fenToPiecesOnBoard(fen));
     }
 
-    public void setPositionFromFen(String fen, String moveToHighlight) {
-        this.fen = fen;
-        this.lastMove = moveToHighlight;
+    public void addPiece(String notation) {
+        String piece = notation.substring(0, 1);
+        int x = letterToCoordinates(notation.substring(1, 2));
+        int y = 8 - Integer.parseInt(notation.substring(3, 4));
+        pieces.add(new PieceOnBoard(piece, x, y));
     }
 
-    public void addPiece(String piece) {
-
+    public void highlightField(String notation) {
+        int x = letterToCoordinates(notation.substring(0, 1));
+        int y = 8 - Integer.parseInt(notation.substring(1, 2));
+        highlights.add(new HighlightOnBoard(x, y, color.getHighlight()));
     }
 
-    public void highlightField(String move) {
+    public void highlightMove(String notation) {
+        highlightField(notation.substring(0, 2));
+        highlightField(notation.substring(2, 4));
+    }
 
+    public void prepareTheBoard() {
+        readPicturesForPieces();
+        drawHighlights();
+        drawPieces();
     }
 
     public SVGDocument getDocument() {
-        this.setLastMoveInNotation(lastMove);
-        this.init(0);
-        return svgBoard.getDocument();
+        return svgChessBoard.getDocument();
     }
 
-    public String getXmlDocument() {
-        return "";
+    public String generateXmlDocument() {
+        return SvgUtils.documentToXmlString(svgChessBoard.getDocument());
     }
 
     public ByteArrayOutputStream generatePng() {
-        return null;
+        return SvgUtils.saveDocumentToPngByteBuffer(svgChessBoard.getDocument());
     }
 
-    public void placePiece(PieceOnBoard piece) {
-        pieces.add(piece);
-    }
-
-    private void initSvgBoard(int aCase) {
-        svgBoard = new SvgBoard(Integer.toHexString(BoardColor.getBlack(aCase)),
-                Integer.toHexString(BoardColor.getWhite(aCase)));
-    }
-
-    private void readFilesForPieces() {
+    private void readPicturesForPieces() {
         for (SvgFileNames entry : SvgFileNames.values()) {
             filesForPieces.put(entry, new SvgPiece(Objects.requireNonNull(getClass().getClassLoader().getResource(entry.getFileName())).toString()));
         }
     }
 
-    private void initPiecesFromFen() {
-        if (fen == null) {
-            throw new IllegalStateException("You have set no fen.");
+    private void drawHighlights() {
+        for (HighlightOnBoard highlight : highlights) {
+            svgChessBoard.highlightSquare(highlight.getX(), highlight.getY());
         }
-        if (pieces != null) {
-            throw new IllegalStateException("You already have some pieces, so fen cannot be applied.");
-        }
-        pieces = FenTools.fenToPiecesOnBoard(fen);
     }
 
-    private void placePiecesOnBoard() {
-        if (pieces == null) {
-            throw new IllegalStateException("No pieces to put on board.");
-        }
+    private void drawPieces() {
         for (PieceOnBoard piece : pieces) {
-            svgBoard.importPiece(filesForPieces.get(SvgFileNames.valueOf(piece.getPiece())).getDocumentNode(), piece.getX(), piece.getY());
+            svgChessBoard.importPiece(filesForPieces.get(SvgFileNames.valueOf(piece.getPiece())).getDocumentNode(), piece.getX(), piece.getY());
         }
-    }
-
-    public void init(Integer color) {
-        initPiecesFromFen();
-        initSvgBoard(color);
-        readFilesForPieces();
-        highlightLastMove();
-        placePiecesOnBoard();
-    }
-
-    public void highlightLastMove() {
-        if (lastMoveInNotation != null && lastMoveInNotation.length() == 4) {
-            svgBoard.highlightSquare(Integer.parseInt(letterToCoordinates(lastMoveInNotation.substring(0, 1))),
-                    8 - Integer.parseInt(lastMoveInNotation.substring(1, 2)));
-            svgBoard.highlightSquare(Integer.parseInt(letterToCoordinates(lastMoveInNotation.substring(2, 3))),
-                    8 - Integer.parseInt(lastMoveInNotation.substring(3, 4)));
-        }
-    }
-
-    private String letterToCoordinates(String letter) {
-        switch (letter) {
-            case "a": return "0";
-            case "b": return "1";
-            case "c": return "2";
-            case "d": return "3";
-            case "e": return "4";
-            case "f": return "5";
-            case "g": return "6";
-            case "h": return "7";
-            default: return null;
-        }
-    }
-
-    public void setPgn(String pgn) {
-        this.pgn = pgn;
-        this.setFen(PgnTools.convertPgnToFen(pgn));
-        this.setLastMoveInNotation(PgnTools.getLastMove(pgn));
-    }
-
-    public void setFen(String fen) {
-        this.fen = fen;
-    }
-
-    public void setLastMoveInNotation(String notation) {
-        this.lastMoveInNotation = notation;
     }
 
 }
